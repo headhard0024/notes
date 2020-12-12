@@ -1,0 +1,8 @@
+add (...) in end a long text
+
+
+```
+if (user.getDesc().length() >= 80) {
+  holder.txtDesc.setText(user.getDesc().subSequence(0, 80) + "...");
+}
+```

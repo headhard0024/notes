@@ -1,0 +1,12 @@
+
+```
+val intent = Intent( G.context , PlainOldActivity::class.java)
+intent.putExtra("name" , name)
+intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+G.context.startActivity(intent)
+```
+
+```
+val intecc = intent.getStringExtra("name")
+Toast.makeText(G.context , "" + intecc , Toast.LENGTH_SHORT).show()
+```

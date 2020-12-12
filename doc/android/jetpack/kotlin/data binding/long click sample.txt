@@ -1,0 +1,52 @@
+long click sample
+
+xml
+```
+<Button
+  android:id="@+id/like_button"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_marginEnd="16dp"
+  android:layout_marginStart="16dp"
+  android:layout_marginTop="16dp"
+  android:textColor="@{testViewModel.color}"
+  android:onClick="@{(view) -> testViewModel.onClick(view)}"
+  android:onLongClick="@{(view) -> testViewModel.onLongClick(view)}"
+  android:text="@string/like"
+  app:layout_constraintBottom_toTopOf="@+id/progressBar"
+  app:layout_constraintEnd_toEndOf="@+id/imageView"
+  app:layout_constraintStart_toStartOf="@+id/imageView"
+  app:layout_constraintTop_toBottomOf="@+id/likes" />
+```
+
+class
+```
+class TestViewModel : ViewModel() {
+
+    var name = MutableLiveData<String>("tt")
+    var family = MutableLiveData<String>("no3ratii")
+    var likes = MutableLiveData<Int>(0)
+    var conter = 0
+    var color = Color.BLUE
+
+    fun onClick(view : View){
+        view.setBackgroundColor(Color.BLUE)
+        likes.value = likes.value?.plus(1)
+    }
+
+    fun onLongClick(view: View): Boolean {
+        view.setBackgroundColor(Color.GREEN)
+        return true
+    }
+
+
+    fun onClickForPlainActivity(name : String){
+//        Toast.makeText(G.context , "" + name , Toast.LENGTH_SHORT).show()
+        val intent = Intent( G.context , PlainOldActivity::class.java)
+        intent.putExtra("name" , name)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        G.context.startActivity(intent)
+    }
+
+}
+```

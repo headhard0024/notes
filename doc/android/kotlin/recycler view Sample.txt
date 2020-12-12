@@ -1,0 +1,45 @@
+recycler view Sample
+
+adapter
+```
+class UserAdapter : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
+
+    private var userList = emptyList<User>()
+
+    fun getUserList(userList : List<User>){
+        this.userList = userList
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.user_item , parent , false))
+    }
+
+    override fun getItemCount(): Int {
+        return userList.size
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val item = userList[position]
+        holder.itemView.txtId.text = item.id.toString()
+        holder.itemView.txtName.text = item.name
+        holder.itemView.txtFamily.text = item.family
+    }
+
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
+}
+```
+
+class
+```
+userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
+val adapter = UserAdapter()
+val recycler = view.recRoot
+recycler.adapter = adapter
+recycler.layoutManager = LinearLayoutManager(context)
+
+userViewModel.readAllUser.observe(viewLifecycleOwner, Observer { userList ->
+    adapter.getUserList(userList)
+})
+```

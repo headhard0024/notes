@@ -1,0 +1,96 @@
+adapter
+```
+import android.app.Activity
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import com.example.android.databinding.basicsample.R
+
+class MyListAdapter(private val context: Activity, private val title: Array<String>, private val description: Array<String>)
+    : ArrayAdapter<String>(context, R.layout.custom_list, title) {
+
+    override fun getView(position: Int, view: View?, parent: ViewGroup): View {
+        val inflater = context.layoutInflater
+        val rowView = inflater.inflate(R.layout.custom_list, null, false)
+
+        val titleText = rowView.findViewById(R.id.title) as TextView
+        val subtitleText = rowView.findViewById(R.id.description) as TextView
+
+        titleText.text = title[position]
+        subtitleText.text = description[position]
+
+        return rowView
+    }
+}
+```
+
+item.xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="horizontal">
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center" >
+    <ImageView
+      android:id="@+id/icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@mipmap/ic_launcher" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:orientation="vertical">
+
+      <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:textStyle="bold"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+      <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="description"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"/>
+    </LinearLayout>
+  </LinearLayout>
+</LinearLayout>
+```
+
+class
+```
+var listName = arrayOf("Melbourne", "Vienna", "Vancouver", "Toronto", "Calgary", "Adelaide", "Perth", "Auckland", "Helsinki", "Hamburg", "Munich", "New York", "Sydney", "Paris", "Cape Town", "Barcelona", "London", "Bangkok")
+var listFamily = arrayOf("Melbourne", "Vienna", "Vancouver", "Toronto", "Calgary", "Adelaide", "Perth", "Auckland", "Helsinki", "Hamburg", "Munich", "New York", "Sydney", "Paris", "Cape Town", "Barcelona", "London", "Bangkok")
+
+
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val adapter = MyListAdapter(this , listName , listFamily)
+        listView1.adapter = adapter
+
+        listView1.setOnItemClickListener(){adapterView, view, position, id ->
+            val itemAtPos = adapterView.getItemAtPosition(position)
+            val itemIdAtPos = adapterView.getItemIdAtPosition(position)
+            Toast.makeText(this, "Click on item at $itemAtPos its item id $itemIdAtPos", Toast.LENGTH_LONG).show()
+
+        }
+    }
+```

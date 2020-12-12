@@ -1,0 +1,6 @@
+data binding and cast int to String
+
+
+```
+ android:text="@{Integer.toString(viewmodel.likes)}"
+```

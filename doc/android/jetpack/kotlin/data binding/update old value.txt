@@ -1,0 +1,15 @@
+
+
+```
+@BindingAdapter("android:paddingLeft")
+fun setPaddingLeft(view: View, oldPadding: Int, newPadding: Int) {
+    if (oldPadding != newPadding) {
+        view.setPadding(padding,
+                    view.getPaddingTop(),
+                    view.getPaddingRight(),
+                    view.getPaddingBottom())
+    }
+}
+```
+
+اگر مقدار قبلی تعقیر کرده جایگذین کن

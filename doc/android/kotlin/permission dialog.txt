@@ -1,0 +1,136 @@
+permission dialog
+
+data
+```
+private fun permissionDialog(context: Context, title: String) {
+    val dialog = Dialog(context)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setCancelable(false)
+
+    dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+    dialog.setContentView(R.layout.permisson_dialog)
+    val body = dialog.findViewById(R.id.txtBody) as TextView
+    body.text = title
+
+    val layOk = dialog.findViewById(R.id.layOk) as LinearLayout
+    layOk.setOnClickListener {
+        dialog.dismiss()
+        askForContactPermission()
+    }
+    dialog.show()
+
+}
+```
+
+xml
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <androidx.cardview.widget.CardView
+
+    android:layout_width="match_parent"
+    app:cardCornerRadius="16dip"
+    app:cardBackgroundColor="@color/darkgrayForBox"
+    android:layout_height="wrap_content">
+
+<LinearLayout
+  android:layout_width="match_parent"
+  android:orientation="vertical"
+  android:layout_height="wrap_content">
+
+<TextView
+  android:layout_width="match_parent"
+  android:textSize="22dip"
+  android:layout_marginTop="8dip"
+  android:gravity="center"
+  android:textColor="@color/icon"
+  android:fontFamily="@font/iranyekanmobileblack"
+  android:text="اجازه دسترسی"
+  android:layout_height="wrap_content"/>
+
+<!--  <ImageView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:background="@color/white"-->
+<!--    android:layout_marginTop="8dip"-->
+<!--    android:layout_marginBottom="8dip"-->
+<!--    android:layout_height="1dip"/>-->
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_marginTop="22dip"
+    android:src="@drawable/shield"
+    android:layout_height="180dip"/>
+
+
+  <TextView
+    android:layout_width="match_parent"
+    android:id="@+id/txtBody"
+    android:textSize="18dip"
+    android:layout_marginTop="16dip"
+    android:layout_marginBottom="8dip"
+    android:layout_marginLeft="8dip"
+    android:layout_marginRight="8dip"
+    android:gravity="center"
+    android:padding="8dip"
+    android:fontFamily="@font/iranyekanmobilebold"
+    android:textColor="@color/icon"
+    android:text="این اجازه دسترسی برای گرفتن لیست مخاطب های شما به کار میرود لطفا تایید بفرمایید"
+    android:layout_height="wrap_content"/>
+
+  <LinearLayout
+    android:id="@+id/layOk"
+    android:layout_width="160dp"
+    android:layout_height="50dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/square_corner_blue"
+    android:gravity="center"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <TextView
+      android:id="@+id/txtSubmit"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/iranyekanmobileregular"
+      android:text="باشه"
+      android:textColor="@color/white"
+      android:textSize="15dp" />
+  </LinearLayout>
+
+</LinearLayout>
+  </androidx.cardview.widget.CardView>
+</RelativeLayout>
+```
+
+use sherid prefranses
+Class G
+
+```
+public static SharedPreferences preferenceList;
+```
+
+```
+preferenceList = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+```
+
+```
+if (MyApplication.preferenceList.getBoolean("PRF_signIn", true)) {
+    permissionDialog(imgSync.context, "این اجازه دسترسی برای گرفتن لیست مخاطب های شما به کار میرود لطفا تایید بفرمایید")
+    val editor: SharedPreferences.Editor = MyApplication.preferenceList.edit()
+    editor.putBoolean("PRF_signIn", false)
+    editor.apply()
+} else {
+    syncLoadingOn()
+    askForContactPermission()
+}
+```

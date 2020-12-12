@@ -1,0 +1,32 @@
+relapse fragment for tab view
+
+
+```
+private val mTitles = arrayOf("صندق های من", "صندق های برتر")
+```
+
+```
+tabView.setTabData(mTitles)
+repleaseFragment(BoxFragment())
+tabView.tabCount
+tabView.setOnTabSelectListener(object : OnTabSelectListener {
+    override fun onTabSelect(position: Int) {
+        if (position == 0) {
+            repleaseFragment(BoxFragment())
+        } else if (position == 1) {
+            repleaseFragment(BestBoxFragment())
+        }
+    }
+    override fun onTabReselect(position: Int) {
+    }
+})
+```
+
+
+```
+private  fun repleaseFragment(fragment: Fragment){
+    val ft = childFragmentManager.beginTransaction()
+    ft.replace(R.id.linRoot, fragment)
+    ft.commit()
+}
+```

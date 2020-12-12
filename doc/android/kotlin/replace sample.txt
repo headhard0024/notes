@@ -1,0 +1,11 @@
+
+```
+if (!buClickValue.contains(".")) {
+                    buClickValue += "."
+                } else {
+                    buClickValue.replace(".", "")
+                }
+            }
+```
+
+can use this code for cut a value form String

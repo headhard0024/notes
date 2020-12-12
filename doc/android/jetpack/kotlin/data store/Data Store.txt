@@ -1,0 +1,38 @@
+object for use in programs
+```
+object DataStore {
+
+    val dataStore = G.getContext().createDataStore("sharid_prifranses")
+
+    fun setValue(value: String, key: String) {
+        GlobalScope.launch {
+            dataStore.edit {
+                it[preferencesKey<String>(key)] = value
+            }
+        }
+    }
+
+   
+    fun getValue(key: String): Flow<String?> {
+            val data = dataStore.data.map { pre ->
+                pre[preferencesKey<String>(key)] ?: ""
+            }
+
+            //        data.asLiveData().observe(lifecycleOwner, Observer {
+            //        value = it ?: "noData"
+            //        Log.i("MONO", "A | $value")
+            //        })
+            return data
+        }
+}
+```
+
+and can use getter and setter
+```
+DataStore.setValue("mohammad", "USER_NAME_TEST")
+
+val value= DataStore.getValue("USER_NAME_TEST_1")
+value.asLiveData().observe(this, Observer {
+   // Toast.makeText(this, "" + it, Toast.LENGTH_SHORT).show()
+})
+```

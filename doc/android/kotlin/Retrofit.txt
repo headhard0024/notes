@@ -1,0 +1,104 @@
+dep
+```
+implementation 'com.google.code.gson:gson:2.8.4'
+implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+```
+
+ServiceBuilder 
+برای ارتباط با سرور 
+```
+object ServiceBuilder {
+
+    val gson = GsonBuilder()
+            .setLenient()
+            .create()
+    val interceptor = HttpLoggingInterceptor()
+    val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+
+ fun getRetrofit(): Retrofit? {
+    val okHttpClient = OkHttpClient.Builder().build()
+    return Retrofit.Builder()
+            .baseUrl("https://ware.uncox.com/api/profile/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+}
+}
+```
+
+اینترفیس برای ارسال مقادیر و برگشت آن
+```
+interface IProfileConnection {
+    @FormUrlEncoded
+    @POST("generate")
+    fun getMovies(@Field("count")count:Int , @Field("gender")gender:String , @Field("type")type:String): Call<UncoxProfile>
+}
+```
+
+کلاس ها
+
+```
+data class UncoxProfile(
+        @SerializedName("status")
+        var status: String,
+        @SerializedName("message")
+        var message: String,
+        @SerializedName("feeds")
+        var feeds: Feeds
+) 
+data class Feeds(
+        @SerializedName("profiles")
+        val profiles: ArrayList<Profile>
+)
+```
+
+```
+data class Profile(
+        @SerializedName("firstname")
+        val firstname: String,
+        @SerializedName("lastname")
+        val lastname: String,
+        @SerializedName("gender")
+        val gender: String,
+        @SerializedName("email")
+        var email: String,
+        @SerializedName("imageUrl")
+        val imageUrl: String,
+        @SerializedName("phone")
+        val phone: String
+)
+```
+
+دریافت اطلاعات
+```
+abstract class UserProfile {
+
+    val request = ServiceBuilder.getRetrofit()?.create(IProfileConnection::class.java)
+    val call = request?.getMovies(10, "both", "brief")
+    var profile: ArrayList<Profile>? = null
+
+    fun test(){
+        call?.enqueue(object : retrofit2.Callback<UncoxProfile> {
+            override fun onFailure(call: Call<UncoxProfile>, t: Throwable) {
+                Log.i("MONO", "| $t.toString()")
+            }
+            override fun onResponse(call: Call<UncoxProfile>, response: Response<UncoxProfile>) {
+                onSuccess(response.body()?.feeds?.profiles)
+            }
+        })
+    }
+    abstract fun onSuccess(profileList: ArrayList<Profile>?)
+}
+```
+
+نمایش 
+
+```
+object : UserProfile() {
+    override fun onSuccess(profileList: ArrayList<Profile>?) {
+        Log.i("MONO" , "" + profileList.toString)
+    }
+}.test()
+```

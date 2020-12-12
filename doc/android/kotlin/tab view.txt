@@ -1,0 +1,82 @@
+tab view
+
+implementation 
+```
+implementation 'com.github.dueeeke:dk-tablayout:1.0.2'
+```
+
+main activity
+```
+private val mTitles = arrayOf("صندق های من", "صندق های برتر")
+tabView.setTabData(mTitles)
+repleaseFragment(BoxFragment())
+        tabView.tabCount
+        tabView.setOnTabSelectListener(object : OnTabSelectListener {
+            override fun onTabSelect(position: Int) {
+                if (position == 0) {
+                    repleaseFragment(BoxFragment())
+                } else if (position == 1) {
+                    repleaseFragment(BestBoxFragment())
+                }
+            }
+            override fun onTabReselect(position: Int) {
+            }
+        })
+```
+
+replaces fragment method
+```
+private  fun repleaseFragment(fragment: Fragment){
+    val ft = childFragmentManager.beginTransaction()
+    ft.replace(R.id.linRoot, fragment)
+    ft.commit()
+}
+```
+
+linRoot 
+is a layout for show data in fragment and is super ed this dip
+
+XML
+```
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dip"
+    android:gravity="top|center_horizontal"
+    android:fontFamily="@font/iranyekanmobilemedium"
+    tools:ignore="MissingConstraints">
+
+    <com.dueeeke.tablayout.SegmentTabLayout
+        app:tabTextAppearance="@style/tab_text"
+        android:id="@+id/tabView"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="42dip"
+        android:layout_marginRight="42dip"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        app:tl_bar_color="@color/colorPrimary"
+        app:tl_indicator_anim_enable="true"
+        app:tl_indicator_corner_radius="20dip"
+        app:tl_indicator_color="@color/white"
+        app:tl_bar_stroke_color="@color/colorPrimaryDark"
+        app:tl_divider_padding="4dip"
+        app:tl_textSelectColor="@color/black"
+        app:tl_indicator_margin_bottom="4dp"
+        app:tl_indicator_margin_left="5dp"
+        app:tl_indicator_margin_right="5dp"
+        app:tl_indicator_margin_top="4dp"
+        app:tl_textBold="BOTH"/>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/linRoot"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+    </LinearLayout>
+```
+   

@@ -1,0 +1,17 @@
+sample for change button background from view model
+
+xml
+```
+android:onClick="@{(view) -> testViewModel.onClick(view)}"
+```
+
+class
+```
+fun onClick(view : View){
+    view.setBackgroundColor(Color.BLUE)
+    likes.value = likes.value?.plus(1)
+}
+```
+
+view
+در لایه برای نمایش دادن مکان کلیک است

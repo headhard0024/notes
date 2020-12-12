@@ -1,0 +1,28 @@
+
+```
+<EditText
+    android:id="@+id/birth_date"
+    android:text="@={Converter.dateToString(viewmodel.birthDate)}"
+/>
+```
+
+```
+object Converter {
+    @InverseMethod("stringToDate")
+    @JvmStatic fun dateToString(
+        view: EditText, oldValue: Long,
+        value: Long
+    ): String {
+        // Converts long to String.
+    }
+
+    @JvmStatic fun stringToDate(
+        view: EditText, oldValue: String,
+        value: String
+    ): Long {
+        // Converts String to long.
+    }
+}
+```
+
+میتوان یک ابجکت جدا ساخت و مقدار ویو مدل را به او داد تا تعقیر داده و برگرداند

@@ -1,0 +1,13 @@
+use import and variable for set view model
+
+
+```
+<import type="com.example.android.databinding.basicsample.data.SimpleViewModel"/>
+```
+
+```
+<variable
+  name="testViewModel"
+  type="com.example.android.databinding.basicsample.data.TestViewModel" />
+```
+هر دو یک کار را انجام میدهند با این تفاوت که اولی باید نام خود کلاس نوشته شود ولی در دومی میتوان اسم دلخواه وارد کرد

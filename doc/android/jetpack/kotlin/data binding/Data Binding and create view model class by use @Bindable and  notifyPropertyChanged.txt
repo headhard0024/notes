@@ -1,0 +1,41 @@
+Data Binding and create view model class by use @Bindable and  notifyPropertyChanged
+
+
+```
+class TestDataModle : BaseObservable {
+
+    private var _title: String?= null
+    private var _url: String? = null
+    private var context: Context? = null
+
+    constructor(title: String, url: String){
+     this._title =  title
+     this._url =  url
+    }
+
+    constructor(context: Context){
+        this.context = context
+    }
+
+    var title: String?
+        @Bindable
+        get() = _title
+        set(value) {
+            _title = value
+            notifyPropertyChanged(BR.title)
+        }
+
+    var url: String?
+        @Bindable
+        get() = _url
+        set(value) {
+            _url = value
+            notifyPropertyChanged(BR.url)
+        }
+}
+```
+
+set this source value in gradle
+```
+https://stackoverflow.com/questions/50956111/unresolved-reference-br-android-studio
+```

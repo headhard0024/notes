@@ -1,0 +1,332 @@
+sample recyclerView
+
+user class
+```
+class User {
+
+  private int id;
+  private String name;
+  private String desc;
+  private int imgRes;
+  private String  callNumber;
+  private String  point;
+
+  public User(String name, String desc, int imgRes, String callNumber, String point) {
+    this.name = name;
+    this.desc = desc;
+    this.imgRes = imgRes;
+    this.callNumber = callNumber;
+    this.point = point;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getDesc() {
+    return desc;
+  }
+
+  public int getImgRes() {
+    return imgRes;
+  }
+
+  public String getCallNumber() {
+    return callNumber;
+  }
+
+  public String getPoint() {
+    return point;
+  }
+}
+```
+
+adapter
+```
+package no3ratii.mohammad.dev.app.kardary;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+class AdapterUser extends RecyclerView.Adapter<AdapterUser.ViewHolder> {
+
+  private ArrayList<User> list;
+  private Context context;
+
+  public AdapterUser(ArrayList<User> list, Context context) {
+    this.list = list;
+    this.context = context;
+  }
+
+
+  @NonNull
+  @Override
+  public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+    ViewHolder viewHolder = new ViewHolder(view);
+    return viewHolder;
+  }
+
+  @Override
+  public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    final User user = list.get(position);
+
+    holder.txtName.setText(user.getName());
+    holder.imgPerson.setImageResource(user.getImgRes());
+    holder.txtPoint.setText(user.getPoint());
+
+    // check description length and set ... if char is more than 50th
+    holder.txtDesc.setMaxLines(2);
+    if (user.getDesc().length() >= 50) {
+      holder.txtDesc.setText(user.getDesc().subSequence(0, 50) + "...");
+    }
+
+    holder.layCall.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Toast.makeText(context, "click" + user.getCallNumber(), Toast.LENGTH_SHORT).show();
+      }
+    });
+
+
+  }
+
+  @Override
+  public int getItemCount() {
+    return list.size();
+  }
+
+  class ViewHolder extends RecyclerView.ViewHolder {
+
+    ImageView imgPerson;
+    LinearLayout layCall;
+    TextView txtName;
+    TextView txtDesc;
+    TextView txtPoint;
+
+    public ViewHolder(View view) {
+      super(view);
+      txtName = (TextView) view.findViewById(R.id.txtName);
+      txtDesc = (TextView) view.findViewById(R.id.txtDesc);
+      txtPoint = (TextView) view.findViewById(R.id.txtPoint);
+      imgPerson = (ImageView) view.findViewById(R.id.imgPerson);
+      layCall = (LinearLayout) view.findViewById(R.id.LayCall);
+
+    }
+  }
+}
+
+```
+
+adapter item xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_margin="8dp"
+  android:orientation="vertical">
+
+  <androidx.cardview.widget.CardView
+    android:layout_width="330dp"
+    android:layout_margin="2dp"
+    app:cardElevation="2dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp">
+
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:padding="10dp">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+          android:layout_width="100dp"
+          android:layout_height="wrap_content">
+
+          <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="500dp">
+
+            <RelativeLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+              <ImageView
+                android:id="@+id/imgPerson"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher" />
+
+            </RelativeLayout>
+
+          </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginLeft="8dp"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="محمد نصرت آبادی"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+          <TextView
+            android:id="@+id/txtDesc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8sp"
+            android:layout_weight="1"
+            android:text="یک متن برای نمایش یک متن برای نمایش یک متن برای نمایش یک متن برای نمایش "
+            android:textColor="#3E3E3E"
+            android:textSize="14dp" />
+
+        </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+          android:layout_width="100dp"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:layout_height="match_parent">
+
+          <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/star" />
+
+          <TextView
+            android:id="@+id/txtPoint"
+            android:layout_width="wrap_content"
+            android:text="4/7"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="right"
+          android:layout_weight="1">
+
+          <LinearLayout
+            android:id="@+id/LayCall"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/butten_background"
+            android:layout_height="wrap_content">
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:text="تماس"
+              android:layout_marginLeft="16dp"
+              android:gravity="center"
+              android:textSize="18sp"
+              android:textColor="#3ECBEE"
+              android:textStyle="bold"
+              android:layout_marginRight="4dp"
+              android:layout_height="match_parent"/>
+
+            <ImageView
+              android:padding="4dp"
+              android:layout_marginRight="8dp"
+              android:layout_width="35dp"
+              android:src="@drawable/phone"
+              android:layout_height="35dp"/>
+
+
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+    </LinearLayout>
+
+
+  </androidx.cardview.widget.CardView>
+</LinearLayout>
+```
+
+main
+```
+public class MainActivity extends AppCompatActivity {
+
+  private ArrayList<User> userList = new ArrayList<>();
+  private RecyclerView recRoot;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    // initialize value for use from xml layout
+    initialize();
+    //set fack value for test recycler
+    setUserFackValue();
+
+    AdapterUser adapterUser = new AdapterUser(userList, this);
+    recRoot.setAdapter(adapterUser);
+  }
+
+  private void initialize() {
+    recRoot = (RecyclerView) findViewById(R.id.recRoot);
+    recRoot.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+  }
+
+  private void setUserFackValue() {
+
+    for (int i = 1; i < 5; i++) {
+      User user = new User("محمد نصرت آبادی" + i,
+        "لورم ایپسوم یا طرحنما (به بندی شده بعد از اینه به نظر ",
+        R.drawable.ic_launcher_background,
+        "9123456789",
+        "4/" + i);
+
+      userList.add(user);
+    }
+  }
+```

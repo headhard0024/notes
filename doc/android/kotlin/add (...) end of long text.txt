@@ -1,0 +1,9 @@
+
+```
+if (item.desc.length >= 10) {
+val desc = item.desc.subSequence(0, 10)
+    holder.itemView.txtDesc.text = "${desc }..."
+} else {
+    holder.itemView.txtDesc.text = item.desc
+}
+```

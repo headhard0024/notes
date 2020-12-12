@@ -1,0 +1,12 @@
+چک نال بودن مقدار در لیوت
+
+
+```
+android:text="@{user.displayName ?? user.lastName}"
+```
+=
+```
+android:text="@{user.displayName != null ? user.displayName : user.lastName}"
+```
+
+

@@ -1,0 +1,32 @@
+@BindingAdapter example
+
+
+```
+@BindingAdapter("imageUrl", "error")
+fun loadImage(view: ImageView, url: String, error: Drawable) {
+    Picasso.get().load(url).error(error).into(view)
+}
+
+```
+
+```
+<ImageView 
+ app:imageUrl="@{venue.imageUrl}"
+ app:error="@{@drawable/venueError}" />
+```
+نام ادپتری که فراخانی میشود در داخل انوتیشن نوشته میشمد
+و باید در هنگام استفاده مقدار دهی شود
+
+اگه یکی از پارامترها رو نمیخوایم مقدار دهی کنیم میشه به این شکل نوش
+```
+@BindingAdapter(value = ["imageUrl", "placeholder"], requireAll = false)
+fun setImageUrl(imageView: ImageView, url: String?, placeHolder: Drawable?) {
+    if (url == null) {
+        imageView.setImageDrawable(placeholder);
+    } else {
+        MyImageLoader.loadInto(imageView, url, placeholder);
+    }
+}
+```
+
+

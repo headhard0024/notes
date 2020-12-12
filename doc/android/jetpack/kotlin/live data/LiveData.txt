@@ -1,0 +1,23 @@
+create new live Data value
+```
+val seekbarValue = MutableLiveData<Int>()
+```
+
+
+setter and getter in class
+```
+mSeekBarViewModel!!.seekbarValue.setValue(12)
+
+mSeekBarViewModel!!.seekbarValue.observe(this, Observer { value ->
+    if (value != null) {
+
+    }
+})
+```
+
+/**/
+Note: You must call the setValue(T) method to update the LiveData object from the main thread. If the code is executed in a worker thread, you can use the postValue(T) method instead to update the LiveData object.
+/**/
+
+
+
