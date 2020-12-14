@@ -1,0 +1,39 @@
+interface class
+
+``
+interface IRecyclerPosition {
+    fun onBackPress(recyclerView: RecyclerView, dx:Int, dy:Int , fab: FloatingActionButton)
+}
+``
+
+create location
+
+    use static for call 
+    ``
+    companion object {
+        private lateinit var contactBackPressListener: IRecyclerPosition
+        //
+        fun setContactOnBackPress(contactBackPressListener: IRecyclerPosition) {
+            this.contactBackPressListener = contactBackPressListener
+        }
+    }
+    ``
+    
+    use in function for set values
+    ``
+    contactBackPressListener.onBackPress(recyclerView,dx,dy , fab)
+    ``
+    
+call 
+``
+      createClass.setContactOnBackPress(object : IRecyclerPosition {
+            override fun onBackPress(
+                recyclerView: RecyclerView,
+                dx: Int,
+                dy: Int,
+                fab: FloatingActionButton
+            ) {
+            //logic//
+            }
+``
+            
