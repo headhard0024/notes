@@ -1,8 +1,9 @@
 object for use in programs
 ```
 
-  implementation "androidx.datastore:datastore:1.0.0-alpha05"
-
+ implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+ 
+```
 ```
 object DataStore {
 
