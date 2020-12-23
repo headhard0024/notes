@@ -1,0 +1,6 @@
+//show phisical keybord in start bottomsheet
+
+        val imgr: InputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        imgr.showSoftInput(edtValue, 0)
+        edtValue.requestFocus()
