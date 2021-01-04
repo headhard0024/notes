@@ -1,0 +1,14 @@
+function dump($value, $return = false) {
+    if (is_array($value)) {
+      $out = print_r($value, true);
+    } else if (is_object($value)) {
+      $out = var_export($value, true);
+    } else {
+      $out = $value;
+    }
+    if ($return) {
+      return "<pre>$out</pre>";
+    } else {
+      echo "<pre>$out</pre>";
+    }
+  }
