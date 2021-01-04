@@ -1,0 +1,23 @@
+use recycler scroll listener for refresh apge and send result to server for get new data
+``
+        //recycerview layoutmanager cast to layoutmanager for get item cont
+        val layoutManager = binding.list.layoutManager as LinearLayoutManager
+
+        binding.list.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val totalItemCount = layoutManager.itemCount
+                val visibleItemCount = layoutManager.childCount
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+
+                // --------------------items - iddenViews.size
+                // ------------------------------------- item number in list
+                // ----------------------------------------------------- total item cont
+                viewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
+
+                Log.i("MONO", "// visibleItemCount = $visibleItemCount ")
+                Log.i("MONO", "// lastVisibleItem = $lastVisibleItem ")
+                Log.i("MONO", "// totalItemCount = $totalItemCount ")
+            }
+        })
+``
