@@ -32,8 +32,6 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
 
 class
 ```
-userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
 val adapter = UserAdapter()
 val recycler = view.recRoot
 recycler.adapter = adapter
