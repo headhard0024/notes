@@ -35,7 +35,10 @@ class
 val adapter = UserAdapter()
 val recycler = view.recRoot
 recycler.adapter = adapter
-recycler.layoutManager = LinearLayoutManager(context)
+/**
+2 is number for set in line items
+*/
+recycler.layoutManager = GridLayoutManager(context, 2,RecyclerView.VERTICAL , false)
 
 userViewModel.readAllUser.observe(viewLifecycleOwner, Observer { userList ->
     adapter.getUserList(userList)
