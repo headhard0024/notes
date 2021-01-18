@@ -1,0 +1,50 @@
+// use this code for save state by viewmodel and livedata 
+// becose in live data we have Observer and this can set after update ui we mose use code in obsever
+
+
+//init start class
+private var mLayoutManager: LinearLayoutManager? = null
+
+//onCreateView
+``
+	mLayoutManager = LinearLayoutManager(context)
+	recycler.layoutManager = mLayoutManager
+
+    userViewModel.readAllUser.observe(viewLifecycleOwner, Observer { userList ->
+        mLayoutManager!!.onRestoreInstanceState(G.state);
+        adapter.getUserList(userList)
+    })
+``
+
+//on Pause
+	override fun onPause() {
+        super.onPause()
+        G.state = mLayoutManager!!.onSaveInstanceState()
+    }
+
+// in class G
+
+public static Parcelable state;
+
+
+// and amby eny time we cant use this _________________________________
+
+	override fun onPause() {
+        super.onPause()
+         G.index = mLayoutManager!!.findFirstVisibleItemPosition()
+         val v: View = requireView().recRoot!!.getChildAt(0)
+	     G.top = if (v == null) 0 else v.top - requireView().recRoot.paddingTop
+    }
+
+    override fun onResume() {
+         super.onResume()
+          if (G.index != -1) {
+             mLayoutManager?.scrollToPositionWithOffset(G.index, G.top);
+          }
+    }
+	
+// in class G
+	public static int index = -1;
+    public static int top = -1;
+	
+	
