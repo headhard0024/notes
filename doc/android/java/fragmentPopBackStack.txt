@@ -1,0 +1,13 @@
+
+// read fragment save to backStack and reloded
+
+FragmentManager mFragmentManager = ((FragmentActivity) FreelancersActivity.this).getSupportFragmentManager();
+        if (mFragmentManager.getBackStackEntryCount() > 1) {
+            onResume();
+            mFragmentManager.popBackStackImmediate();
+        } else {
+            //this.finishAffinity();
+
+            startActivity (new Intent (FreelancersActivity.this, SelectorActivity.class));
+
+        }
