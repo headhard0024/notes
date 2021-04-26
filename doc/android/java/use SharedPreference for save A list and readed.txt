@@ -1,0 +1,47 @@
+SaveTagCommentListInPreference
+
+ private void SaveTagCommentListInPreference(List<FreelancerStrengthAndWeaknessModel> freelancerWeaknessList, List<FreelancerStrengthAndWeaknessModel> freelancerStrengthList) {
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(CommentActivity.this);
+    SharedPreferences.Editor mEdit1 = sp.edit();
+
+    mEdit1.putInt("freelancerWeaknessList", freelancerWeaknessList.size()).apply();
+    for (int i = 0; i < freelancerWeaknessList.size(); i++) {
+      mEdit1.putString("freelancerWeaknessListTitle" + i, freelancerWeaknessList.get(i).getTitle()).apply();
+      mEdit1.putInt("freelancerWeaknessListId" + i, freelancerWeaknessList.get(i).getId()).apply();
+    }
+
+    mEdit1.putInt("freelancerStrengthList", freelancerStrengthList.size()).apply();
+    for (int i = 0; i < freelancerStrengthList.size(); i++) {
+      mEdit1.putString("freelancerStrengthListTitle" + i, freelancerStrengthList.get(i).getTitle()).apply();
+      mEdit1.putInt("freelancerStrengthListId" + i, freelancerStrengthList.get(i).getId()).apply();
+    }
+  }
+  
+  loadTagCommentListFromPreference
+  
+   public void loadTagCommentListFromPreference() {
+    SharedPreferences mSharedPreference1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    freelancerWeaknessList.clear();
+    freelancerStrengthList.clear();
+
+    {
+      int size = mSharedPreference1.getInt("freelancerStrengthList", 0);
+      for (int i = 0; i < size; i++) {
+        FreelancerStrengthAndWeaknessModel strength = new FreelancerStrengthAndWeaknessModel();
+        strength.setId(mSharedPreference1.getInt("freelancerStrengthListId" + i, 0));
+        strength.setTitle(mSharedPreference1.getString("freelancerStrengthListTitle" + i, ""));
+        freelancerStrengthList.add(strength);
+      }
+    }
+    {
+      int size = mSharedPreference1.getInt("freelancerWeaknessList", 0);
+      for (int i = 0; i < size; i++) {
+        FreelancerStrengthAndWeaknessModel strength = new FreelancerStrengthAndWeaknessModel();
+        strength.setId(mSharedPreference1.getInt("freelancerWeaknessListId" + i, 0));
+        strength.setTitle(mSharedPreference1.getString("freelancerWeaknessListTitle" + i, ""));
+        freelancerWeaknessList.add(strength);
+      }
+    }
+    //weaknessAdapter.AddItems(freelancerWeaknessList);
+    //strengthAdapter.AddItems(freelancerStrengthList);
+  }
