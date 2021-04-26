@@ -1,0 +1,4 @@
+          isEmpty = false;
+          mAdapter = new ListFreelancerInfoAdapter(new ArrayList<FreelancerModel>(), getActivity(), isEmpty);
+          recyclerView.setAdapter(mAdapter);
+          GetPrimitiveOnList(0, limit);
