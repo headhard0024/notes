@@ -1,0 +1,11 @@
+        
+        // in normal state for use result in frgment callback response go to Current activity
+        // for set in fragment use this code in onActivityResult activity
+        
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        
+        for (fragment in supportFragmentManager.fragments) {
+            fragment.onActivityResult(requestCode, resultCode, data)
+        }
+    }
