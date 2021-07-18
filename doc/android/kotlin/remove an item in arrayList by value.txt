@@ -1,0 +1,14 @@
+ freelancerTagsAdapter!!.getIFreelancerStrengthAndWeaknes { position, id, title, selected ->
+            if (selected) {
+                tagList.add(id)
+            } else {
+                for (value in tagList) {
+                    if (tagList.contains(id)) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            tagList.removeIf { s -> s == id }
+                        }
+                        break
+                    }
+                }
+            }
+        }
