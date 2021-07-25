@@ -1,0 +1,28 @@
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      nestedScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+        @Override
+        public void onScrollChange(View view, int i, int yValue, int i2, int i3) {
+          
+          boolean mustShowAnim = true;
+          boolean mustShowFirst = true;
+          int lodValue = 0;
+          
+          if (yValue < 10 && mustShowAnim && !mustShowFirst) {
+          mustShowAnim = true;
+          mustShowFirst = true;
+        }
+        if (yValue > 10 && mustShowAnim && mustShowFirst) {
+          Utils.setAnimation(R.anim.slide_in_bottom_to_top, txtTitle, getApplicationContext());
+          txtTitle.setVisibility(View.VISIBLE);
+          mustShowAnim = false;
+        }
+        if (lodValue > yValue && !mustShowAnim && mustShowFirst) {
+          Utils.setAnimation(R.anim.slide_in_top_to_bottom, txtTitle, getApplicationContext());
+          txtTitle.setVisibility(View.INVISIBLE);
+          mustShowAnim = true;
+          mustShowFirst = false;
+        }
+        lodValue = yValue;
+        }
+      });
+    }
