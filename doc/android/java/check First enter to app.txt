@@ -1,0 +1,7 @@
+ PrefManager prefManager = new PrefManager(this);
+if (!prefManager.isFirstTimeLaunch()) {
+    // is note first enter
+    launchHomeScreen();
+}else{
+    // first enter
+}
