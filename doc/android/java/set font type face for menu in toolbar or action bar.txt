@@ -1,0 +1,17 @@
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.recive_orders_activity_menu, menu);
+        for (i in 0 until menu!!.size()) {
+            val menuItem = menu!!.getItem(i)
+            val menuTitle = menuItem.title.toString()
+            val typeface = Typeface.createFromAsset(KardariApp.context.assets, "fonts/IRANSans.ttf")
+            val spannableString = SpannableString(menuTitle)
+            // For demonstration purposes only, if you need to support < API 28 just use the CustomTypefaceSpan class only.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                val typefaceSpan: TypefaceSpan = if (typeface != null) TypefaceSpan(typeface) else TypefaceSpan("sans-serif")
+                spannableString.setSpan(typefaceSpan, 0, menuTitle.length,
+                        Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+            }
+            menuItem.title = spannableString
+        }
+        return true
+    }
