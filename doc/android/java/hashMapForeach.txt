@@ -1,0 +1,6 @@
+ArrayList<Integer> questionIdList = new ArrayList<>();
+    ArrayList<String> questionAnswerList = new ArrayList<>();
+    for (Map.Entry<Integer, String> entry : KardariApp.questionList.entrySet()) {
+      questionIdList.add(entry.getKey());
+      questionAnswerList.add(entry.getValue());
+    }
