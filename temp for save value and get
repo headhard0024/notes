@@ -1,0 +1,49 @@
+fun SaveFreelancerInfo() {
+//        val sp = PreferenceManager.getDefaultSharedPreferences(activity)
+//        val mEdit1 = sp.edit()
+//        mEdit1.putInt(Constants.FREELAN_ID, freelancerId).apply()
+//        mEdit1.putString(Constants.SHARED_HEADTASK_FREELANCER, Expertise).apply()
+//        mEdit1.putInt(Constants.SHARED_HEADTASK_ID_FREELANCER, ExpertiseId).apply()
+//        mEdit1.putString(Constants.SHARED_FRELN_IMG, ImageName).apply()
+//        mEdit1.putString(Constants.SHARED_IMAGE_URL, ImageUrl).apply()
+//        mEdit1.putString(Constants.SHARED_FRELN_RATE, RateFreeln).apply()
+//        mEdit1.putString(Constants.SHARED_FRELN_NAME, NameFreeln).apply()
+//        mEdit1.putString(Constants.SHARED_FRELN_STATUS, isActive).apply()
+//        mEdit1.putString(Constants.SHARED_FRELN_ISBAN, isBanned).apply()
+//        mEdit1.putString(Constants.SHARED_FRELN_ISSEND, isGetNotify).apply()
+//        mEdit1.putString(Constants.SHARED_FRELN_ISSMS, isGetSMS).apply()
+//        mEdit1.putInt(Constants.SHARED_FRELN_GRADE, gradeId).apply()
+//        mEdit1.putInt(Constants.SHARED_IDENTITY, identity).apply()
+//        mEdit1.putString(Constants.FREELAN_UNIQUE_ID, uniqueId).apply()
+//        mEdit1.putBoolean(IS_EDIT_FREELANCER, false).apply()
+//        mEdit1.putInt(Constants.SHARED_HEAD_ID, ExpertiseId).apply()
+//        mEdit1.putString(Constants.SHARED_HEAD_NAME, Expertise).apply()
+        saveSubTask()
+        showFreelancerInfo()
+    }
+    
+     fun loadFreelancerInfo() {
+        val mSharedPreference1 = PreferenceManager.getDefaultSharedPreferences(activity)
+//        freelancerId = mSharedPreference1.getInt(Constants.FREELAN_ID, 1)
+//        Expertise = mSharedPreference1.getString(Constants.SHARED_HEADTASK_FREELANCER, "")
+//        ExpertiseId = mSharedPreference1.getInt(Constants.SHARED_HEADTASK_ID_FREELANCER, 0)
+//        var ImageName = mSharedPreference1.getString(Constants.SHARED_FRELN_IMG, "")
+//        var ImageUrl = mSharedPreference1.getString(Constants.SHARED_IMAGE_URL, "")
+//        imagePath = ImageUrl + ImageName + ".jpg"
+//        RateFreeln = mSharedPreference1.getString(Constants.SHARED_FRELN_RATE, "5.0")
+//        NameFreeln = mSharedPreference1.getString(Constants.SHARED_FRELN_NAME, "نام کاردان")
+//        isActive = mSharedPreference1.getString(Constants.SHARED_FRELN_STATUS, "true")
+//        isBanned = mSharedPreference1.getString(Constants.SHARED_FRELN_ISBAN, "false")
+//        isGetNotify = mSharedPreference1.getString(Constants.SHARED_FRELN_ISSEND, "false")
+//        isGetSMS = mSharedPreference1.getString(Constants.SHARED_FRELN_ISSMS, "true")
+//        identity = mSharedPreference1.getInt(Constants.SHARED_IDENTITY, 2)
+//        uniqueId = mSharedPreference1.getString(Constants.FREELAN_UNIQUE_ID, "empty")
+        subNames.clear()
+        val size = mSharedPreference1.getInt("SizeSubName", 0)
+        for (i in 0 until size) {
+            subNames.add(mSharedPreference1.getString("SubNames$i", null)!!)
+        }
+
+        showFreelancerInfo()
+
+    }
