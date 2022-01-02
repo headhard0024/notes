@@ -1,0 +1,6 @@
+ //hide
+ ((InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE))
+      .toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+      
+      //visible
+      getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
