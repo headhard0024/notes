@@ -9,7 +9,7 @@
       
           if ((wifi != null & datac != null)
       && (wifi.isConnected() | datac.isConnected())) {
-      /** internet is availabel */
+      /** internet is available */
     } else {
-      /** connection is failor */
+      /** connection is fail */
     }
