@@ -1,3 +1,6 @@
+    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
     ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
     android.net.NetworkInfo wifi = cm
       .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
