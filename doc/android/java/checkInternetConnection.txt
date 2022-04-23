@@ -1,0 +1,12 @@
+    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    android.net.NetworkInfo wifi = cm
+      .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+    android.net.NetworkInfo datac = cm
+      .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+      
+          if ((wifi != null & datac != null)
+      && (wifi.isConnected() | datac.isConnected())) {
+      /** internet is availabel */
+    } else {
+      /** connection is failor */
+    }
