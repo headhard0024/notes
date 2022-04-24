@@ -13,3 +13,13 @@
     } else {
       /** connection is fail */
     }
+    
+    /** in fragment */
+    private fun internetIsAvailable(): Boolean {
+        /** return internet status  */
+        val cm = activity!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectByWifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+        val connectByData = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+
+        return connectByWifi != null && connectByData != null && connectByWifi.isConnected or connectByData.isConnected
+    }
